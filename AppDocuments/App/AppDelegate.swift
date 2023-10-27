@@ -1,9 +1,6 @@
 //
 //  AppDelegate.swift
 //  AppDocuments
-//
-//  Created by Мамуля on 25.10.2023.
-//
 
 import UIKit
 
@@ -14,6 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
         return true
     }
 
