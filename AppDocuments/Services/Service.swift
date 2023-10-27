@@ -9,12 +9,7 @@ import UIKit
 final class Service {
     
     private let pathForFolder: String
-   /*
-    var imagesNameArray: [String] {
-        return (try? FileManager.default.contentsOfDirectory(atPath: pathForFolder)) ?? []
-    }
-    */
-    
+
     init(pathForFolder: String) {
         self.pathForFolder = pathForFolder
     }
@@ -42,20 +37,9 @@ final class Service {
             }
         }
     }
-    /*
-    func loadImages(into images: inout [UIImage]) {
-        let fileURLs = imagesNameArray
-        for fileURL in fileURLs {
-            if let image = UIImage(contentsOfFile: fileURL) {
-                images.append(image)
-                print(images.count)
-            }
-        }
-    }
-    */
+
     func deliteImage(imageName: String) {
         let imageURL = URL(fileURLWithPath: pathForFolder).appendingPathComponent(imageName)
-        print(imageURL)
         do {
             try FileManager.default.removeItem(at: imageURL)
         } catch {
@@ -80,7 +64,6 @@ final class Service {
              }
 
         } catch {
-            print(images.map { $0.imageName })
             print("ошибка получения данных",error)
         }
         return images

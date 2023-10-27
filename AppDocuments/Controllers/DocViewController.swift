@@ -145,7 +145,6 @@ extension DocViewController: UITableViewDelegate, UITableViewDataSource {
             imageModels.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             fileService.deliteImage(imageName: imageToDelite)
-            print(imageToDelite)
         }
     }
     
