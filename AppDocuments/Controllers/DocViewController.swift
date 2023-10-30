@@ -13,7 +13,10 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     var imageModels: [ImageModel] = []
     let imagePicker: UIImagePickerController = UIImagePickerController()
 
-    private lazy var addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPhotoButton))
+    var addBarButtonItem: UIBarButtonItem {
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPhotoButton))
+        return button
+    }
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -43,7 +46,8 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Documents"
+        navigationItem.rightBarButtonItem = self.addBarButtonItem
+        self.title = "Documents"
         loadImage()
         setupImagePicker()
         setupLayout()
@@ -114,7 +118,7 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         
         NSLayoutConstraint.activate([
             
-            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 50),
             tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
