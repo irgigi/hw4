@@ -68,4 +68,22 @@ final class Service {
         }
         return images
     }
+    
+    static var sortingEnabled: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: SettingsKey.sortingEnabled.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: SettingsKey.sortingEnabled.rawValue)
+        }
+    }
+    
+    static var password: String? {
+        get {
+            return UserDefaults.standard.string(forKey: SettingsKey.passwordSet.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: SettingsKey.passwordSet.rawValue)
+        }
+    }
 }

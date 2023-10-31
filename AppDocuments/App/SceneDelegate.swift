@@ -16,11 +16,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        let settingsController = UINavigationController(rootViewController: SettingsViewController())
-        let viewController = UINavigationController(rootViewController: DocViewController())
+        let settingController = UINavigationController(rootViewController: SettingsViewController())
+        let docViewController = DocViewController()
         let passController = UINavigationController(rootViewController: PasswordController())
         
-        //let navigationController = UINavigationController(rootViewController: tabBarController)
+        let tabBarController = UITabBarController()
+  
+        tabBarController.viewControllers = [docViewController, settingController]
+        docViewController.tabBarItem = UITabBarItem(title: "список", image: UIImage(systemName: "folder.badge.plus"), tag: 0)
+        settingController.tabBarItem = UITabBarItem(title: "настройки", image: UIImage(systemName: "gearshape.fill"), tag: 1)
+        
+        //_ = UINavigationController(rootViewController: tabBarController)
         window?.rootViewController = passController  //navigationController
         window?.makeKeyAndVisible()
     }

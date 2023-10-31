@@ -10,6 +10,7 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     private var fileService = Service()
     
+    
     var imageModels: [ImageModel] = []
     let imagePicker: UIImagePickerController = UIImagePickerController()
 
@@ -43,11 +44,17 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        sorting()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = self.addBarButtonItem
-        self.title = "Documents"
+        title = "Documents"
+        navigationItem.title = self.title
         loadImage()
         setupImagePicker()
         setupLayout()
@@ -83,12 +90,6 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             //imageModels.insert(imgModel, at: 0)
         }
         
-        //для сортировки в таблице
-        /*
-        imageModels.sort { image, name in
-            image.imageName < name.imageName
-        }
-        */
         tableView.reloadData()
     }
     
@@ -100,6 +101,21 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             image.draw(in: CGRect(origin: .zero, size: targetSize))
         }
         return resizedImage
+    }
+    
+    func sorting() {
+        //для сортировки в таблице
+        
+        if Service.sortingEnabled {
+            imageModels.sort { image, name in
+                image.imageName < name.imageName
+            }
+        } else {
+            imageModels.sort { image, name in
+                image.imageName > name.imageName
+            }
+        }
+        tableView.reloadData()
     }
 
     //MARK: - button
@@ -118,7 +134,7 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         
         NSLayoutConstraint.activate([
             
-            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 50),
+            tableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),

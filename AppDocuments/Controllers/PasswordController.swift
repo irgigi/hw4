@@ -10,9 +10,13 @@ class PasswordController: UIViewController {
     
     let keychain = KeychainSwift()
     
-    var currentButtonState: ButtonState = .enterPassword
+    let key = CustomKeychainService()
     
-    var initialPassword: String?
+    public lazy var currentButtonState: ButtonState = {
+        let state: ButtonState = .enterPassword
+        return state
+    }()
+    
     
     //MARK: - свойства
     
@@ -88,7 +92,7 @@ class PasswordController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBrown
+        view.backgroundColor = .lightGray
         view.addSubview(passwordField)
         view.addSubview(passwordButton)
         view.addSubview(nameField)
@@ -103,36 +107,45 @@ class PasswordController: UIViewController {
         case .createPassword:
             if let name = nameField.text {
                 if let password = passwordField.text, password.count >= 4 {
-                    
                     if let password2 = repeatPasswordField.text {
+                        key.setPassword(password, password2, name: name)
+                        /*
                         if password2 == password {
-                            initialPassword = password
                             keychain.set(password, forKey: name)
                             repeatPasswordField.removeFromSuperview()
                             currentButtonState = .enterPassword
+                        } else {
+                            print("пароли не совпадают")
                         }
-                    } else {
-                        print("пароли не совпадают")
+                        */
                     }
+                } else {
+                    print("пароль не верен")
                 }
             } else {
                 print("пароль должен быть более 4 символов")
             }
         case .enterPassword:
             if let name = nameField.text {
-                
                 if let password = passwordField.text {
                     //Keychain
-                    if let password = keychain.get(name) {
-                        print("вход выполнен")
-                        passwordField.text = ""
-                        tabbarCreate()
+                    key.createPassword(password, name: name)
+                    tabbarCreate()
+                    /*
+                    if let passwordGet = keychain.get(name) {
+                        if password == passwordGet {
+                            print("вход выполнен")
+                            passwordField.text = ""
+                            tabbarCreate()
+                        } else {
+                            print("ошибка ввода пароля")
+                        }
                     } else {
                         print("такого пароля нет")
                         currentButtonState = .createPassword
-                        extraConstraint()
                         passwordField.text = ""
                     }
+                    */
                 }
             }
         }
@@ -142,6 +155,7 @@ class PasswordController: UIViewController {
     func buttonState(_ state: ButtonState) {
         switch state {
         case .createPassword:
+            extraConstraint()
             passwordButton.setTitle("Создайте пароль", for: .normal)
         case .enterPassword:
             passwordButton.setTitle("Введите пароль", for: .normal)
@@ -149,18 +163,20 @@ class PasswordController: UIViewController {
     }
     
     func tabbarCreate() {
+        let docViewController = UINavigationController(rootViewController: DocViewController())
         let tabBarController = UITabBarController()
-        let docViewController = DocViewController()
-        let settingController = SettingsViewController()
+        let settingController = UINavigationController(rootViewController: SettingsViewController())
         tabBarController.viewControllers = [docViewController, settingController]
-        docViewController.tabBarItem = UITabBarItem(title: "список", image: UIImage(systemName: "folder.badge.plus"), tag: 0)
+        docViewController.tabBarItem = UITabBarItem(title: "список", image: UIImage(systemName: "folder.fill.badge.plus"), tag: 0)
         settingController.tabBarItem = UITabBarItem(title: "настройки", image: UIImage(systemName: "gearshape.fill"), tag: 1)
+        
         if let navigationController = self.navigationController {
             navigationController.pushViewController(tabBarController, animated: true)
             //navigationController.setNavigationBarHidden(true, animated: false)
         } else {
             print("ошибка входа")
         }
+         
     }
     
     //MARK: -

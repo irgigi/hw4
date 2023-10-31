@@ -15,7 +15,8 @@
 		8632C4BE2AED359800C904A5 /* ModelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8632C4BD2AED359800C904A5 /* ModelButton.swift */; };
 		86568D012AEF80010012A88E /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 86568D002AEF80010012A88E /* KeychainSwift */; };
 		86568D032AEF99690012A88E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86568D022AEF99690012A88E /* SettingsViewController.swift */; };
-		86568D052AEF9C7D0012A88E /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86568D042AEF9C7D0012A88E /* KeychainService.swift */; };
+		86568D052AEF9C7D0012A88E /* CustomKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86568D042AEF9C7D0012A88E /* CustomKeychainService.swift */; };
+		86568D072AEFF7540012A88E /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86568D062AEFF7540012A88E /* Setting.swift */; };
 		865D5BCF2AED170500ABC519 /* PasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D5BCE2AED170500ABC519 /* PasswordController.swift */; };
 		867A031C2AEA5C130075A7C9 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867A031B2AEA5C130075A7C9 /* Service.swift */; };
 		867A031F2AEA87190075A7C9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867A031E2AEA87190075A7C9 /* Model.swift */; };
@@ -31,7 +32,8 @@
 		862CED662AE921BA0093606B /* DocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewController.swift; sourceTree = "<group>"; };
 		8632C4BD2AED359800C904A5 /* ModelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelButton.swift; sourceTree = "<group>"; };
 		86568D022AEF99690012A88E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		86568D042AEF9C7D0012A88E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		86568D042AEF9C7D0012A88E /* CustomKeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeychainService.swift; sourceTree = "<group>"; };
+		86568D062AEFF7540012A88E /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		865D5BCE2AED170500ABC519 /* PasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordController.swift; sourceTree = "<group>"; };
 		867A031B2AEA5C130075A7C9 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		867A031E2AEA87190075A7C9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -102,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				867A031B2AEA5C130075A7C9 /* Service.swift */,
-				86568D042AEF9C7D0012A88E /* KeychainService.swift */,
+				86568D042AEF9C7D0012A88E /* CustomKeychainService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -112,6 +114,7 @@
 			children = (
 				867A031E2AEA87190075A7C9 /* Model.swift */,
 				8632C4BD2AED359800C904A5 /* ModelButton.swift */,
+				86568D062AEFF7540012A88E /* Setting.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,12 +195,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86568D072AEFF7540012A88E /* Setting.swift in Sources */,
 				862CED532AE91F5A0093606B /* AppDelegate.swift in Sources */,
 				867A031C2AEA5C130075A7C9 /* Service.swift in Sources */,
 				8632C4BE2AED359800C904A5 /* ModelButton.swift in Sources */,
 				865D5BCF2AED170500ABC519 /* PasswordController.swift in Sources */,
 				867A031F2AEA87190075A7C9 /* Model.swift in Sources */,
-				86568D052AEF9C7D0012A88E /* KeychainService.swift in Sources */,
+				86568D052AEF9C7D0012A88E /* CustomKeychainService.swift in Sources */,
 				862CED552AE91F5A0093606B /* SceneDelegate.swift in Sources */,
 				862CED672AE921BA0093606B /* DocViewController.swift in Sources */,
 				86568D032AEF99690012A88E /* SettingsViewController.swift in Sources */,
