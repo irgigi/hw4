@@ -8,10 +8,10 @@ import KeychainSwift
 
 class PasswordController: UIViewController {
     
-    let keychain = KeychainSwift()
-    
     let key = CustomKeychainService()
     
+    let myAlert = AlertController()
+ 
     public lazy var currentButtonState: ButtonState = {
         let state: ButtonState = .enterPassword
         return state
@@ -54,6 +54,8 @@ class PasswordController: UIViewController {
         //text.addTarget(self, action: #selector(fields), for: .editingChanged)
         text.translatesAutoresizingMaskIntoConstraints = false
 
+
+
         return text
     }()
     
@@ -88,7 +90,7 @@ class PasswordController: UIViewController {
         return(button)
     }()
     
-    //MARK:
+    //MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +100,10 @@ class PasswordController: UIViewController {
         view.addSubview(nameField)
         buttonState(currentButtonState)
         elementConstraint()
+        myAlert.setup()
+
     }
+    
     
     //MARK: - methods
     
@@ -108,16 +113,12 @@ class PasswordController: UIViewController {
             if let name = nameField.text {
                 if let password = passwordField.text, password.count >= 4 {
                     if let password2 = repeatPasswordField.text {
-                        key.setPassword(password, password2, name: name)
-                        /*
-                        if password2 == password {
-                            keychain.set(password, forKey: name)
-                            repeatPasswordField.removeFromSuperview()
+                        if key.setPassword(password, password2, name: name) {
                             currentButtonState = .enterPassword
-                        } else {
-                            print("пароли не совпадают")
+                            buttonState(currentButtonState)
+                            repeatPasswordField.isHidden = true
                         }
-                        */
+                        self.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     print("пароль не верен")
@@ -125,27 +126,29 @@ class PasswordController: UIViewController {
             } else {
                 print("пароль должен быть более 4 символов")
             }
+
         case .enterPassword:
+            
             if let name = nameField.text {
                 if let password = passwordField.text {
-                    //Keychain
-                    key.createPassword(password, name: name)
-                    tabbarCreate()
-                    /*
-                    if let passwordGet = keychain.get(name) {
-                        if password == passwordGet {
-                            print("вход выполнен")
-                            passwordField.text = ""
-                            tabbarCreate()
-                        } else {
-                            print("ошибка ввода пароля")
-                        }
+                    if key.enterPassword(password, name: name) {
+                        Service.shared.getName(name)
+                        tabbarCreate()
                     } else {
-                        print("такого пароля нет")
-                        currentButtonState = .createPassword
-                        passwordField.text = ""
+                        print("Ошибка входа")
+                        myAlert.yesAction = {
+                            self.currentButtonState = .createPassword
+                            self.buttonState(self.currentButtonState)
+                            //self.myAlert.yesAction = nil
+                        }
+                        myAlert.noAction = {
+                            self.nameField.text = ""
+                            self.passwordField.text = ""
+                            print("cancel")
+                            //self.myAlert.noAction = nil
+                        }
+                        present(myAlert, animated: true, completion: nil)
                     }
-                    */
                 }
             }
         }
@@ -169,7 +172,7 @@ class PasswordController: UIViewController {
         tabBarController.viewControllers = [docViewController, settingController]
         docViewController.tabBarItem = UITabBarItem(title: "список", image: UIImage(systemName: "folder.fill.badge.plus"), tag: 0)
         settingController.tabBarItem = UITabBarItem(title: "настройки", image: UIImage(systemName: "gearshape.fill"), tag: 1)
-        
+
         if let navigationController = self.navigationController {
             navigationController.pushViewController(tabBarController, animated: true)
             //navigationController.setNavigationBarHidden(true, animated: false)
@@ -179,7 +182,7 @@ class PasswordController: UIViewController {
          
     }
     
-    //MARK: -
+    //MARK: - constraints
     
     func extraConstraint() {
         
@@ -207,11 +210,9 @@ class PasswordController: UIViewController {
             nameField.heightAnchor.constraint(equalToConstant: 40),
             
             passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //passwordField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             passwordField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 20),
             passwordField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
             passwordField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-            //passwordField.widthAnchor.constraint(equalToConstant: 100),
             passwordField.heightAnchor.constraint(equalToConstant: 40),
             
             

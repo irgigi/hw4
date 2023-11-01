@@ -103,8 +103,10 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         return resizedImage
     }
     
+    //MARK: - для SettingsViewController
+    
     func sorting() {
-        //для сортировки в таблице
+        //для сортировки в таблице по UISwitch
         
         if Service.sortingEnabled {
             imageModels.sort { image, name in
@@ -125,7 +127,7 @@ class DocViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         
     }
     
-    //MARK: Layout
+    //MARK: - Layout
     
     func setupLayout() {
         view.addSubview(tableView)

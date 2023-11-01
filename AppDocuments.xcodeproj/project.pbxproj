@@ -20,6 +20,7 @@
 		865D5BCF2AED170500ABC519 /* PasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D5BCE2AED170500ABC519 /* PasswordController.swift */; };
 		867A031C2AEA5C130075A7C9 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867A031B2AEA5C130075A7C9 /* Service.swift */; };
 		867A031F2AEA87190075A7C9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867A031E2AEA87190075A7C9 /* Model.swift */; };
+		869078262AF2841C0092A8ED /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869078252AF2841C0092A8ED /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		865D5BCE2AED170500ABC519 /* PasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordController.swift; sourceTree = "<group>"; };
 		867A031B2AEA5C130075A7C9 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		867A031E2AEA87190075A7C9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		869078252AF2841C0092A8ED /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		862CED512AE91F5A0093606B /* AppDocuments */ = {
 			isa = PBXGroup;
 			children = (
+				869078242AF284070092A8ED /* Alert */,
 				867A031D2AEA870A0075A7C9 /* Model */,
 				862CED6A2AE923480093606B /* Services */,
 				862CED692AE923350093606B /* Controllers */,
@@ -117,6 +120,14 @@
 				86568D062AEFF7540012A88E /* Setting.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		869078242AF284070092A8ED /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				869078252AF2841C0092A8ED /* AlertController.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +214,7 @@
 				867A031F2AEA87190075A7C9 /* Model.swift in Sources */,
 				86568D052AEF9C7D0012A88E /* CustomKeychainService.swift in Sources */,
 				862CED552AE91F5A0093606B /* SceneDelegate.swift in Sources */,
+				869078262AF2841C0092A8ED /* AlertController.swift in Sources */,
 				862CED672AE921BA0093606B /* DocViewController.swift in Sources */,
 				86568D032AEF99690012A88E /* SettingsViewController.swift in Sources */,
 			);

@@ -8,7 +8,15 @@ import UIKit
 
 final class Service {
     
+    static var shared = Service()
+    
     private let pathForFolder: String
+    var nameInField: String?
+    lazy var getName: ((String) -> Void) = { name in
+        print(name)
+        self.nameInField = name
+    }
+
 
     init(pathForFolder: String) {
         self.pathForFolder = pathForFolder
@@ -86,4 +94,6 @@ final class Service {
             UserDefaults.standard.set(newValue, forKey: SettingsKey.passwordSet.rawValue)
         }
     }
+    
+    
 }

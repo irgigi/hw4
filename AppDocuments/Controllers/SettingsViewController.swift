@@ -7,9 +7,14 @@ import KeychainSwift
 
 final class SettingsViewController: UIViewController {
     
-    let keychain = KeychainSwift()
+    let passwordController = PasswordController()
+    
+    let key = CustomKeychainService()
     
     let sortingSwitch = UISwitch()
+    
+    var getName = Service.shared.nameInField
+
     
     let settingOptions = ["Сортировка", "Поменять пароль"]
         
@@ -37,14 +42,16 @@ final class SettingsViewController: UIViewController {
         view.backgroundColor = .systemBlue
         sortingSwitch.isOn = true
         setupLoyout()
-
         
         
     }
     
+    
     @objc func sortingSwitchChanched(_ sender: UISwitch) {
         Service.sortingEnabled = sender.isOn
     }
+    
+    
     
     func setupLoyout() {
         view.addSubview(tableView)
@@ -72,7 +79,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.text = settingOptions[indexPath.row]
         if indexPath.row == 0 {
-            
             Service.sortingEnabled = sortingSwitch.isOn
             sortingSwitch.addTarget(self, action: #selector(sortingSwitchChanched(_:)), for: .valueChanged)
             cell.accessoryView = sortingSwitch
@@ -83,11 +89,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 1 {
-            let passwordController = PasswordController()
+
             passwordController.currentButtonState = .createPassword
+            passwordController.nameField.text = getName
+            passwordController.nameField.isUserInteractionEnabled = false
+            passwordController.isEditing = false
+            passwordController.nameField.backgroundColor = .lightGray
             self.present(passwordController, animated: true, completion: nil)
+            key.delitePassword(name: getName)
         }
     }
-    
-    
 }
